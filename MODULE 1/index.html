@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Local Community Event Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body onbeforeunload="return confirmExit()">
+    <!-- Navigation -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#events">Events</a>
+        <a href="#contact">Contact</a>
+        <a href="help.html" target="_blank">Help</a>
+    </nav>
+
+    <!-- Main -->
+    <main>
+        <section id="home">
+            <div id="welcomeBanner">Welcome, User! <span style="color:red; font-weight:bold;">50% OFF Today!</span></div>
+        </section>
+
+        <section id="events">
+            <h2>Past Events Gallery</h2>
+            <table>
+                <caption>Recent Events</caption>
+                <tr>
+                    <td><img src="images/event1.jpg" alt="Event 1" title="Music Fest" class="gallery-img"></td>
+                    <td><img src="images/event2.jpg" alt="Event 2" title="Food Fest" class="gallery-img"></td>
+                    <td><img src="images/event3.jpg" alt="Event 3" title="Book Fair" class="gallery-img"></td>
+                </tr>
+                <tr>
+                    <td><img src="images/event4.jpg" alt="Event 4" title="Art Show" class="gallery-img"></td>
+                    <td><img src="images/event5.jpg" alt="Event 5" title="Tech Expo" class="gallery-img"></td>
+                    <td><img src="images/event6.jpg" alt="Event 6" title="Community Walk" class="gallery-img"></td>
+                </tr>
+            </table>
+
+            <h2>Register for an Event</h2>
+            <form id="registrationForm">
+                <label>Name: <input type="text" name="name" required placeholder="Your Name" autofocus></label><br>
+                <label>Email: <input type="email" name="email" required placeholder="email@example.com"></label><br>
+                <label>Date: <input type="date" name="date" required></label><br>
+                <label>Phone: <input type="text" id="phone" onblur="validatePhone(this)"></label><br>
+                <label>Event Type:
+                    <select id="eventType" name="eventType" onchange="showFee(this)">
+                        <option value="">Select</option>
+                        <option value="Music">Music</option>
+                        <option value="Food">Food</option>
+                        <option value="Tech">Tech</option>
+                    </select>
+                </label><br>
+                <p>Fee: <span id="feeDisplay"></span></p>
+                <label>Message: <textarea id="message" onkeyup="countCharacters()"></textarea></label><br>
+                <p>Characters typed: <span id="charCount">0</span></p>
+                <button type="button" onclick="submitForm()">Submit</button>
+                <output id="confirmation"></output>
+            </form>
+
+            <h2>Promo Video</h2>
+            <video id="promoVideo" width="320" controls oncanplay="videoReady()">
+                <source src="promo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p id="videoStatus"></p>
+        </section>
+
+        <section id="contact">
+            <h2>Find Nearby Events</h2>
+            <button onclick="getLocation()">Find Nearby Events</button>
+            <p id="location"></p>
+
+            <h3>User Preferences</h3>
+            <button onclick="savePreference()">Save Preferences</button>
+            <button onclick="clearPreferences()">Clear Preferences</button>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Local Community</p>
+    </footer>
+</body>
+</html>

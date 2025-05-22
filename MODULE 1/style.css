@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+}
+nav a {
+    margin-right: 15px;
+}
+#welcomeBanner {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+}
+.highlight {
+    background-color: yellow;
+}
+.gallery-img {
+    width: 150px;
+    height: 100px;
+    border: 2px solid gray;
+}
+table {
+    margin-bottom: 20px;
+}
