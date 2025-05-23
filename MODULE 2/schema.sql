@@ -1,5 +1,4 @@
-CREATE DATABASE EVE;
-USE EVE;
+
 -- Create Users table
 CREATE TABLE Users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
