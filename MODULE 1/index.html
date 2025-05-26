@@ -1,48 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Local Community Event Portal</title>
-    <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <title>Local Community Event Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+   /*NAVBAR SECTION*/
+    .navbar {
+      background-color: #333;
+      overflow: hidden;
+    }
+    .navbar a {
+      float: left;
+      display: block;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    .main {
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    .events, .contact {
+      margin: 20px 0;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    
+    .highlight {
+      background-color: rgb(0, 0, 0);
+      color: white;
+      font-weight: bold;
+    }
+    /*IMAGE GALLERY*/
+    .gallery-img {
+      height: 100px;
+      margin: 5px;
+      border-radius: 5px;
+      padding: 10%;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+    .enlarged-img {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.8);
+      z-index: 1001;
+      justify-content: center;
+      align-items: center;
+    }
+    .enlarged-img img {
+      max-width: 80%;
+      max-height: 80%;
+      border: 5px solid white;
+    }
+    /*CONFIRM MESSAGES*/
+    #confirmationMessage {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #dff0d8;
+      border: 1px solid #d6e9c6;
+      border-radius: 4px;
+      color: #3c763d;
+    }
+    #message {
+      margin-top: 10px;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
 </head>
-<body onbeforeunload="return confirmExit()">
-    <!-- Navigation -->
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#events">Events</a>
-        <a href="#contact">Contact</a>
-        <a href="help.html" target="_blank">Help</a>
-    </nav>
+<body>
+  <!-- Navigation -->
+  <div class="navbar">
+    <a href="#home">Home</a>
+    <a href="#events">Events</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <a href="help.html" target="_blank">Help</a>
+    <a href="#" onclick="popup()">Login</a>
+  </div>
 
-    <!-- Main -->
-    <main>
-        <section id="home">
-            <div id="welcomeBanner">Welcome, User! <span style="color:red; font-weight:bold;">50% OFF Today!</span></div>
-        </section>
+  <!-- Main Section -->
+  <div class="main" id="home">
+    <!-- News Section -->
+    <div class="news-section" id="news">
+      <h2>Community News</h2>
+      <article>
+        <h3>Upcoming Community Festival</h3>
+        <p>Join us for the annual community festival featuring local artists, musicians, and food vendors. The event will take place in Central Park from June 15-17. Admission is free for all residents.</p>
+        <p>We're excited to announce that this year's festival will include a special children's area with interactive games and educational activities. Local schools will be participating with student performances throughout the weekend.</p>
+      </article>
+      <article>
+        <h3>New Community Center Opening</h3>
+        <p>The long-awaited community center is finally opening its doors next month. The facility includes a state-of-the-art gymnasium, meeting rooms, and a public library extension.</p>
+        <p>Membership registration will begin next week, with special early-bird rates for the first 100 members. The center will offer various programs for all age groups, from toddlers to seniors.</p>
+      </article>
+    </div>
 
-        <section id="events">
-            <h2>Past Events Gallery</h2>
-            <table>
-                <caption>Recent Events</caption>
-                <tr>
-                    <td><img src="images/event1.jpg" alt="Event 1" title="Music Fest" class="gallery-img"></td>
-                    <td><img src="images/event2.jpg" alt="Event 2" title="Food Fest" class="gallery-img"></td>
-                    <td><img src="images/event3.jpg" alt="Event 3" title="Book Fair" class="gallery-img"></td>
-                </tr>
-                <tr>
-                    <td><img src="images/event4.jpg" alt="Event 4" title="Art Show" class="gallery-img"></td>
-                    <td><img src="images/event5.jpg" alt="Event 5" title="Tech Expo" class="gallery-img"></td>
-                    <td><img src="images/event6.jpg" alt="Event 6" title="Community Walk" class="gallery-img"></td>
-                </tr>
-            </table>
+    <!-- Responsive Container Section -->
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="content-box">
+            <h3>Column 1</h3>
+            <p>This is the first column content. It will stack vertically on mobile devices, display two per row on tablets, and three per row on desktop screens.</p>
+          </div>
+        </div>
+        <div class="col">
+          <div class="content-box">
+            <h3>Column 2</h3>
+            <p>This is the second column content. The layout will automatically adjust based on the screen size for optimal viewing experience.</p>
+          </div>
+        </div>
+        <div class="col">
+          <div class="content-box">
+            <h3>Column 3</h3>
+            <p>This is the third column content. The responsive design ensures content is always readable and well-organized across all devices.</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-            <h2>Register for an Event</h2>
-            <form id="registrationForm">
-                <label>Name: <input type="text" name="name" required placeholder="Your Name" autofocus></label><br>
-                <label>Email: <input type="email" name="email" required placeholder="email@example.com"></label><br>
-                <label>Date: <input type="date" name="date" required></label><br>
-                <label>Phone: <input type="text" id="phone" onblur="validatePhone(this)"></label><br>
+    <!-- Two Column Layout Section -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-3 sidebar">
+          <div class="sidebar-content">
+            <h3>Quick Links</h3>
+            <ul>
+              <li>🏠 Dashboard</li>
+              <li>📅 Events</li>
+              <li>💬 Messages</li>
+              <li>⚙️ Settings</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-9 main-content">
+          <div class="content-area">
+            <h2>Welcome to Your Community Portal</h2>
+            <p>Stay updated with the latest events, announcements, and resources. Use the sidebar to quickly navigate through the portal features.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Four Column Layout Section -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="column-box">
+            <h3>📢 Announcements</h3>
+            <p>Central Park Summer Fest on June 15-17! Don't miss the live music and food trucks.</p>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="column-box">
+            <h3>📆 Upcoming Events</h3>
+            <p>Book Fair: Aug 5-7 at Community Library. Register now for early access!</p>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="column-box">
+            <h3>🗳️ Community Polls</h3>
+            <p>Vote for the next community workshop: Gardening, Coding, or Yoga?</p>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="column-box">
+            <h3>📚 Resources</h3>
+            <p>Download the latest community newsletter and event guides here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Centered Content Section -->
+    <div class="container mt-5">
+      <div class="row justify-content-center align-items-center centered-row">
+        <div class="col-md-6">
+          <div class="centered-content">
+            <h2>🌟 Get Involved!</h2>
+            <p>Join our volunteer team and make a difference in your neighborhood.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reordered Columns Section -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6 order-md-2">
+          <div class="reorder-box">
+            <h3>📰 Latest News</h3>
+            <p>Community Center opens July 10th with new fitness and learning programs.</p>
+          </div>
+        </div>
+        <div class="col-md-6 order-md-1">
+          <div class="reorder-box">
+            <h3>🤝 Volunteer Drive</h3>
+            <p>Sign up for our summer volunteer drive and help organize local events.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Responsive Navbar Section -->
+    <div class="container mt-5">
+      <nav class="responsive-navbar">
+        <div class="nav-brand">🌐 CommunityConnect</div>
+        <div class="nav-links">
+          <a href="#" class="nav-link">Home</a>
+          <a href="#events" class="nav-link">Events</a>
+          <a href="#news" class="nav-link">News</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Card Layout Section -->
+    <div class="container mt-5">
+      <div class="card-container">
+        <div class="card">
+          <div class="card-header">🎉 Summer Fest</div>
+          <div class="card-body">Live music, food stalls, and games for all ages. June 15-17, Central Park.</div>
+        </div>
+        <div class="card">
+          <div class="card-header">📖 Library Opening</div>
+          <div class="card-body">Grand opening of the new community library extension. July 10th.</div>
+        </div>
+        <div class="card">
+          <div class="card-header">🤝 Volunteer Drive</div>
+          <div class="card-body">Join our team and help organize upcoming events. Sign up today!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Events -->
+    <div class="events" id="events">
+      <h2>Events</h2>
+      <div class="eventCard">
+        <table>
+          <tr>
+            <th>Event</th>
+            <th>Date</th>
+            <th>Location</th>
+          </tr>
+          <tr>
+            <td><img src="images/image1.jpg" alt="image 1" title="Music Fest" class="gallery-img" ondblclick="enlarge(this.src)"><br>Music Festival</td>
+            <td>June 15-17</td>
+            <td>Central Park</td>
+          </tr>
+          <tr>
+            <td><img src="images/image2.jpg" alt="image 2" title="Food Fest" class="gallery-img" ondblclick="enlarge(this.src)"><br>Food Festival</td>
+            <td>July 1-3</td>
+            <td>Downtown Square</td>
+        </tr>
+        <tr>
+            <td><img src="images/image3.jpg" alt="image 3" title="Book Fair" class="gallery-img" ondblclick="enlarge(this.src)"><br>Book Fair</td>
+            <td>August 5-7</td>
+            <td>Community Library</td>
+        </tr>
+      </table>
+      </div>
+
+      <div class="vid">
+         <video width="320" height="240" controls oncanplay="showMessage()">
+    <source src="videos/video1.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+        </video>
+        <div id="message"></div>
+      </div>
+
+      <form onsubmit="event.preventDefault(); formsubmit()">
+        <label>Name: <input type="text" name="name" required placeholder="Mathan Kumar G" autofocus></label>
+        <label>Email: <input type="email" name="email" required placeholder="mathanmsecit@gmail.com"></label>
+        <label>Date: <input type="date" name="date" required></label>
                 <label>Event Type:
                     <select id="eventType" name="eventType" onchange="showFee(this)">
                         <option value="">Select</option>
@@ -50,36 +303,231 @@
                         <option value="Food">Food</option>
                         <option value="Tech">Tech</option>
                     </select>
-                </label><br>
-                <p>Fee: <span id="feeDisplay"></span></p>
-                <label>Message: <textarea id="message" onkeyup="countCharacters()"></textarea></label><br>
-                <p>Characters typed: <span id="charCount">0</span></p>
-                <button type="button" onclick="submitForm()">Submit</button>
-                <output id="confirmation"></output>
+        </label>
+                <input type="hidden" id="fee" name="fee">
+                <input type="submit" value="Submit" onclick="showConfirmation(event)">
+                <input type="button" value="Clear Preferences" onclick="clearPreferences()">
+                <input type="button" value="Find Nearby Events" onclick="findNearbyEvents()">
+                <output id="confirmationMessage"></output>
+                <output id="locationMessage"></output>
             </form>
+    </div>
 
-            <h2>Promo Video</h2>
-            <video id="promoVideo" width="320" controls oncanplay="videoReady()">
-                <source src="promo.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <p id="videoStatus"></p>
-        </section>
+    <!-- Feedback Form -->
+    <div class="contact" id="contact">
+      <h2>Feedback</h2>
+      <form onsubmit="showfeedConfirmation(event)">
+        <label for="fbName">Name:</label>
+        <input type="text" id="fbName" name="fbName" required>
 
-        <section id="contact">
-            <h2>Find Nearby Events</h2>
-            <button onclick="getLocation()">Find Nearby Events</button>
-            <p id="location"></p>
+        <label for="fbPhone">Phone:</label>
+        <input type="tel" id="fbPhone" name="fbPhone" required onblur="validatePhone(this)">
 
-            <h3>User Preferences</h3>
-            <button onclick="savePreference()">Save Preferences</button>
-            <button onclick="clearPreferences()">Clear Preferences</button>
-        </section>
-    </main>
+        <label for="fbEvent">Event Type:</label>
+        <select id="fbEvent" onchange="displayFee(this)">
+          <option value="">Select</option>
+          <option value="Music">Music</option>
+          <option value="Food">Food</option>
+          <option value="Tech">Tech</option>
+        </select>
+        <p>Fee: <span id="feeDisplay">--</span></p>
 
-    <!-- Footer -->
+        <label for="feedback">Feedback:</label>
+        <textarea id="feedback" rows="4" onkeydown="countChars()" onkeyup="countChars()"></textarea>
+        <p>Characters: <span id="charCount">0</span></p>
+
+        <input type="submit" value="Submit">
+        <output id="feedconfirmationMessage"></output>
+      </form>
+    </div>
+
+    <!-- Footer section -->
     <footer>
-        <p>&copy; 2025 Local Community</p>
+        <div>&copy; 2023 Local Community Event Portal</div>
     </footer>
+  </div>
+
+  <!-- Login Popup -->
+  <div id="welcomeBanner" class="popup">
+    <h2>Login</h2>
+    <form>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password">
+      <span class="highlight">50% OFF Today!</span>
+      <input type="button" value="Close" onclick="closePopup()">
+      <input type="submit" value="Login" onclick="showlogConfirmation(event)">
+      <output id="loginConfirmationMessage"></output>
+    </form>
+  </div>
+
+  <!-- Enlarged Image Viewer -->
+  <div id="imagePopup" class="enlarged-img" onclick="closeImage()">
+    <img id="enlargedImg" src="" alt="Enlarged">
+  </div>
+
+  <!-- Bootstrap Typography Utilities Section -->
+  <div class="container my-5">
+    <h2 class="mb-4">Bootstrap Typography Utilities</h2>
+    <h1 class="display-1">display-1 Heading</h1>
+    <p class="lead">This is a lead paragraph. It stands out from regular paragraphs.</p>
+    <p class="text-muted">This text is muted and less emphasized.</p>
+    <p class="fw-bold">This text is bold using <code>fw-bold</code>.</p>
+    <p class="text-uppercase">this text is uppercase</p>
+    <p class="text-lowercase">THIS TEXT IS LOWERCASE</p>
+    <p class="text-capitalize">this text is capitalized</p>
+  </div>
+
+  <!-- Bootstrap Registration Form Section -->
+  <div class="container my-5">
+    <h2 class="mb-4">Registration Form</h2>
+    <form>
+      <div class="mb-3">
+        <label for="regName" class="form-label">Name</label>
+        <input type="text" class="form-control" id="regName" placeholder="Enter your name">
+      </div>
+      <div class="mb-3">
+        <label for="regEmail" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="regEmail" placeholder="name@example.com">
+      </div>
+      <div class="mb-3">
+        <label for="regPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="regPassword" placeholder="Password">
+      </div>
+      <div class="mb-3 input-group">
+        <span class="input-group-text">+91</span>
+        <input type="tel" class="form-control" placeholder="Phone number">
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="regCheck">
+        <label class="form-check-label" for="regCheck">I agree to the terms and conditions</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+  </div>
+
+  <!-- Bootstrap Login Form (form-floating) Section -->
+  <div class="container my-5">
+    <h2 class="mb-4">Login Form (Form Floating)</h2>
+    <form>
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com">
+        <label for="loginEmail">Email address</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+        <label for="loginPassword">Password</label>
+      </div>
+      <button type="submit" class="btn btn-success">Login</button>
+    </form>
+  </div>
+
+  <!-- Bootstrap Buttons Section -->
+  <div class="container my-5">
+    <h2 class="mb-4">Bootstrap Buttons</h2>
+    <div class="mb-3">
+      <button class="btn btn-primary">Primary</button>
+      <button class="btn btn-secondary">Secondary</button>
+      <button class="btn btn-success">Success</button>
+      <button class="btn btn-danger">Danger</button>
+      <button class="btn btn-warning">Warning</button>
+      <button class="btn btn-info">Info</button>
+      <button class="btn btn-light">Light</button>
+      <button class="btn btn-dark">Dark</button>
+      <button class="btn btn-link">Link</button>
+    </div>
+    <div class="mb-3">
+      <button class="btn btn-outline-primary">Outline Primary</button>
+      <button class="btn btn-outline-secondary">Outline Secondary</button>
+      <button class="btn btn-outline-success">Outline Success</button>
+      <button class="btn btn-outline-danger">Outline Danger</button>
+      <button class="btn btn-outline-warning">Outline Warning</button>
+      <button class="btn btn-outline-info">Outline Info</button>
+      <button class="btn btn-outline-dark">Outline Dark</button>
+    </div>
+    <div class="mb-3">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary">Left</button>
+        <button type="button" class="btn btn-primary">Middle</button>
+        <button type="button" class="btn btn-primary">Right</button>
+      </div>
+    </div>
+    <div class="mb-3">
+      <div class="btn-group" role="group" aria-label="Toggle button group">
+        <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck1">Toggle 1</label>
+        <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck2">Toggle 2</label>
+        <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck3">Toggle 3</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Navbar and Tabs Section -->
+  <div class="container my-5">
+    <h2 class="mb-4">Bootstrap Navbar & Navigation</h2>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">CommunityConnect</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">News</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-light" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active p-3" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">Welcome to the Home tab!</div>
+      <div class="tab-pane fade p-3" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">This is your Profile tab content.</div>
+      <div class="tab-pane fade p-3" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">Contact us at support@communityconnect.com</div>
+    </div>
+    <ul class="nav nav-pills mt-4">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Settings</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Messages</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
